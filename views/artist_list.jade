@@ -1,0 +1,8 @@
+extends layout
+
+block content 
+  h1=title
+    each artist in artists
+      a(href='/artists/'+artist._id)
+       .artist
+         p #{artist.title}

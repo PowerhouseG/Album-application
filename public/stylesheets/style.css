@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.label-input{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  width: 300px;
+}

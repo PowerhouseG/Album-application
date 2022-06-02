@@ -1,0 +1,18 @@
+extends layout
+
+block content 
+  h1=title
+  a(href="/albums/"+albuminstance.album._id)
+    h2=albuminstance.album.name+(undefined!==albuminstance.specifics?albuminstance.specifics:'')
+  if albuminstance.released
+   p
+    strong Studio/Label: 
+    | #{albuminstance.description} (#{albuminstance.released})
+  else 
+    p
+     strong Studio/Label: 
+     | #{albuminstance.description}
+  .update
+   a(href=albuminstance.url+'/update') Update
+  .delete 
+   a(href=albuminstance.url+'/delete') Delete 

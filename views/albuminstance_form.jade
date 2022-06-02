@@ -1,0 +1,48 @@
+extends layout
+
+block content 
+  h1=title
+  if !albums
+      a(href='/albums/'+id)
+        h2=name
+  form(method='POST' action='')
+    if albums 
+     .label-input
+      label(for='album') Album:
+        select#album(type='select' placeholder='Select album' name='album' required='true' )
+          - albums.sort(function(a, b) {let textA = a.name; let textB = b.name; return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+          for album in albums
+            if albuminstance
+              option(
+                value=album._id
+                selected=(
+                  album._id.toString()==albuminstance.album._id.toString()
+                  || album._id.toString()==albuminstance.album.toString()
+                ) ? 'selected' : false
+              ) #{album.name}
+            else
+              option(value=album._id) #{album.name}
+    else 
+      input(type='hidden' name='album_id' value=id)
+      input(type='hidden' name='album_name' value=name)
+
+    .label-input
+      label(for='specifics') Specifics: 
+      input#specifics(type='text' name = 'specifics' placeholder='(20th Anniversary Edition' value=
+    (undefined===albuminstance?'':albuminstance.specifics===undefined?''
+    :albuminstance.specifics))
+    .label-input
+      label(for='released') Released: 
+      input#released(type='tel' name="released" placeholder='2020' value=
+    (undefined===albuminstance?'':albuminstance.released===undefined?''
+    :albuminstance.released))
+    .label-input 
+      label(for='description') Studio/Label: 
+      //doesn't show on firefox
+      textarea#description(name="description", cols="30", rows="3" 
+      placeholder='NRG Recording Studios (North Hollywood, California)')=(undefined===albuminstance?'':albuminstance.description===undefined?'':albuminstance.description)
+      button(type="submit") Submit
+    if errors 
+      ul
+        for error in errors
+          li=error.msg

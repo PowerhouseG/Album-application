@@ -1,0 +1,14 @@
+extends layout
+
+block content 
+  h1=title
+    h2=artist.title 
+    if artist.career_end  
+     p #{artist.career_start} - #{artist.career_end} 
+    else 
+     p= artist.career_start 
+    h3 Albums 
+    each album in albums 
+      a(href='/albums/'+album._id)
+        .album 
+          p=album.name

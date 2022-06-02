@@ -1,0 +1,17 @@
+extends layout
+
+block content 
+  h1=title
+  h2=album.name
+  a(href='/artists/'+album.artist._id)=album.artist.title
+  p=album.description
+  h3 Genres 
+  ul
+   each genre in album.genres 
+    li=genre.name
+  h3 Releases 
+  ul
+    each instance in album_instances
+      li
+        a(href='/albuminstance/'+instance._id)=instance.description+(instance.released===undefined||instance.released===null?'':' ('+instance.released+')')
+  a(href='/albuminstance/'+album._id+"/create") Create new album instance    

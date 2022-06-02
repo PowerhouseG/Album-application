@@ -1,0 +1,15 @@
+extends layout
+
+block content 
+  h1=title
+  a(href="/albums/"+albuminstance.album._id)
+    h2=albuminstance.album.name+(undefined!==albuminstance.specifics?albuminstance.specifics:'')
+  if albuminstance.released
+   p Are you sure you want to delete #{albuminstance.description} (#{albuminstance.released})
+  else 
+    p Are you sure you want to delete #{albuminstance.description}
+  form(method='POST' action='')
+   input(type="hidden", name="album_instance_id", required=true,value=albuminstance._id)
+   input(type="hidden", name="album_id", required=true,value=albuminstance.album._id)
+
+   button(type="submit") Yes
